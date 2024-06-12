@@ -21,8 +21,8 @@
 
     <!-- flash message -->
     @if (session()->has('message'))
-        <x-alert class="mb-3 alert-warning" title="Mesej" description="{{ session('message') }}"
-            icon="o-exclamation-triangle" dismissible />
+        <x-alert class="mb-3 alert-warning" title="{{ session('message') }}" description="" icon="o-exclamation-triangle"
+            dismissible />
     @endif
     <!-- end flash message -->
 
@@ -33,7 +33,9 @@
         </div>
         <x-table :headers="$headers" :rows="$post">
             @scope('actions', $post)
-                <x-button class="text-red-500 btn-ghost btn-sm" icon="o-trash" wire:click="delete({{ $post['id'] }})"
+                <x-button class="text-red-500 btn-ghost btn-sm" icon="o-pencil-square"
+                    link="/posts/edit/{{ $post->id }}" />
+                <x-button class="text-red-500 btn-ghost btn-sm" icon="o-trash" wire:click="destroy({{ $post['id'] }})"
                     wire:confirm="Are you sure?" spinner />
             @endscope
         </x-table>

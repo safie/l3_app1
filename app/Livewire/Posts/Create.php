@@ -12,9 +12,9 @@ class Create extends Component
     use WithFileUploads;
 
     //image
-    #[Rule('required', message: 'Masukkan Gambar Post')]
-    #[Rule('image', message: 'File Harus Gambar')]
-    #[Rule('max:1024', message: 'Ukuran File Maksimal 1MB')]
+    // #[Rule('required', message: 'Masukkan Gambar Post')]
+    // #[Rule('image', message: 'File Harus Gambar')]
+    // #[Rule('max:1024', message: 'Ukuran File Maksimal 1MB')]
     public $image;
 
     //title
@@ -36,17 +36,25 @@ class Create extends Component
         $this->validate();
 
         //store image in storage/app/public/posts
-        $this->image->storeAs('public/posts', $this->image->hashName());
+        if ($this->image != null) {
+            $this->image->storeAs('public/posts', $this->image->hashName());
 
+
+            //create post
+            Post::create([
+                'image' => $this->image->hashName(),
+                'title' => $this->title,
+                'description' => $this->description,
+            ]);
+        }
         //create post
         Post::create([
-            'image' => $this->image->hashName(),
             'title' => $this->title,
             'description' => $this->description,
         ]);
 
         //flash message
-        session()->flash('message', 'Data Berhasil Disimpan.');
+        session()->flash('message', 'Data telah disimpan.');
 
         //redirect
         return redirect()->route('posts.index');

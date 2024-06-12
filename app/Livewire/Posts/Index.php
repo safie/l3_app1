@@ -10,6 +10,18 @@ class Index extends Component
 {
     use WithPagination;
 
+    public function destroy($id)
+    {
+        //destroy
+        Post::destroy($id);
+
+        //flash message
+        session()->flash('message', 'Data Berhasil Dihapus.');
+
+        //redirect
+        return redirect()->route('posts.index');
+    }
+
     public function render()
     {
         return view('livewire.posts.index', [
