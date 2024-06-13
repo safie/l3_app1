@@ -15,11 +15,9 @@ export default {
         extend: {},
     },
     daisyui: {
-    themes: ["light", "dark", "lofi", "wireframe", "winter"],
-  },
+        themes: ["light", "dark", "lofi", "wireframe", "winter"],
+    },
 
     // Add daisyUI
-    plugins: [
-        require("daisyui"),
-        ]
-}
+    plugins: [require("@tailwindcss/forms"), require("daisyui")],
+};
