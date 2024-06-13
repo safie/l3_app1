@@ -15,7 +15,7 @@ export default {
         extend: {},
     },
     daisyui: {
-    themes: ["light", "dark", "lofi", "wireframe"],
+    themes: ["light", "dark", "lofi", "wireframe", "winter"],
   },
 
     // Add daisyUI

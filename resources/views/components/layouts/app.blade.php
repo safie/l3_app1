@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html data-theme="wireframe" lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html data-theme="winter" lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
     <meta charset="utf-8">
