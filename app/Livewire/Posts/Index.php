@@ -10,6 +10,20 @@ class Index extends Component
 {
     use WithPagination;
 
+    public $post;
+
+    public function mount()
+    {
+        // $posts = Post::paginate(10);
+
+        // $this->posts = $posts->map(
+        //     function ($post, $index) use ($currentPage, $perPage) {
+        //         $posts->no = ($currentPage - 1) * $perPage + ($index + 1);
+        //         return $post;
+        //     }
+        // );
+    }
+
     public function destroy($id)
     {
         //destroy
@@ -25,7 +39,7 @@ class Index extends Component
     public function render()
     {
         return view('livewire.posts.index', [
-            'posts' => Post::latest()->paginate(5)
+            'posts' => Post::paginate(10)
         ]);
     }
 }

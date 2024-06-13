@@ -8,15 +8,18 @@ export default {
         "./app/Livewire/**/**/*.php",
 
         // Add mary
-        "./vendor/robsontenorio/mary/src/View/Components/**/*.php"
+        "./vendor/robsontenorio/mary/src/View/Components/**/*.php",
+        "./vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php",
     ],
     theme: {
         extend: {},
     },
     daisyui: {
-    themes: ["light", "dark", "lofi"],
+    themes: ["light", "dark", "lofi", "wireframe"],
   },
 
     // Add daisyUI
-    plugins: [require("daisyui")]
+    plugins: [
+        require("daisyui"),
+        ]
 }

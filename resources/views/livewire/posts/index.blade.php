@@ -1,8 +1,16 @@
 @php
-    $post = $posts;
+    //untuk tambah numbering yang render setiap pages
+    $currentPage = $posts->currentPage();
+    $perPage = $posts->perPage();
+
+    $posts->map(function ($post, $index) use ($currentPage, $perPage) {
+        $post->no = ($currentPage - 1) * $perPage + ($index + 1);
+        return $post;
+    });
 
     $headers = [
-        ['key' => 'id', 'label' => '#'],
+        ['key' => 'no', 'label' => '#'],
+        ['key' => 'id', 'label' => 'ID'],
         ['key' => 'title', 'label' => 'Title'],
         ['key' => 'description', 'label' => 'Description'], # <---- nested attributes
     ];
@@ -10,7 +18,7 @@
 
 <div>
     <!-- HEADER -->
-    <x-header title="Post" separator progress-indicator>
+    <x-header class="uppercase" title="Post" separator progress-indicator>
         <x-slot:middle class="!justify-end">
             <x-input placeholder="Search..." wire:model.live.debounce="search" clearable icon="o-magnifying-glass" />
         </x-slot:middle>
@@ -31,7 +39,7 @@
         <div class="flex flex-row-reverse">
             <x-button class="btn-primary btn-sm" label="Tambah" link="/posts/create" />
         </div>
-        <x-table :headers="$headers" :rows="$post">
+        <x-table :headers="$headers" :rows="$posts" with-pagination>
             @scope('actions', $post)
                 <x-button class="text-red-500 btn-ghost btn-sm" icon="o-pencil-square"
                     link="/posts/edit/{{ $post->id }}" />
